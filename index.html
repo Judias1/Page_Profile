@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070d19">
+    <meta name="description" content="A glassmorphism student and lifelong learner portfolio with a CSS-only portrait layout toggle.">
+    <title>Jude Adrian C. Cosido | Student &amp; Lifelong Learner</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%237c3aed'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Arial' font-size='36' font-weight='700' fill='white'%3EP%3C/text%3E%3C/svg%3E">
+    <link rel="preload" href="assets/fonts/poppins-400.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="assets/fonts/poppins-700.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="theme.css">
+    <script src="spotlight.js" defer></script>
+</head>
+<body>
+    <!-- Checkboxes power the theme and layout. Only the cursor spotlight uses JavaScript. -->
+    <input class="theme-input" type="checkbox" id="theme-toggle" aria-label="Dark mode" checked>
+    <input class="control-input" type="checkbox" id="portrait-toggle" aria-label="Use portrait layout with bottom navigation">
+
+    <!-- Reusable, locally embedded icons keep the preview fully self-contained. -->
+    <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <symbol id="icon-home" viewBox="0 0 24 24">
+            <path d="m3 11 9-8 9 8"></path>
+            <path d="M5 10v10h14V10"></path>
+            <path d="M9 20v-6h6v6"></path>
+        </symbol>
+        <symbol id="icon-user" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 21a8 8 0 0 1 16 0"></path>
+        </symbol>
+        <symbol id="icon-book" viewBox="0 0 24 24">
+            <path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"></path>
+        </symbol>
+        <symbol id="icon-gamepad" viewBox="0 0 24 24">
+            <path d="M17.3 5H6.7a4 4 0 0 0-4 3.6l-.7 7A3 3 0 0 0 5 18.5c.8 0 1.6-.4 2.1-1l1.4-1.4a2 2 0 0 1 1.4-.6h4.2a2 2 0 0 1 1.4.6l1.4 1.4c.5.6 1.3 1 2.1 1a3 3 0 0 0 3-2.9l-.7-7a4 4 0 0 0-4-3.6Z"></path>
+            <path d="M6 11h4M8 9v4M15 12h.01M18 10h.01"></path>
+        </symbol>
+        <symbol id="icon-film" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+            <path d="M7 3v18M17 3v18M3 8h4M3 16h4M17 8h4M17 16h4M7 12h10"></path>
+        </symbol>
+        <symbol id="icon-pencil" viewBox="0 0 24 24">
+            <path d="m15 5 4 4L8 20H4v-4L15 5Z"></path>
+            <path d="m13 7 4 4M4 20l4-1"></path>
+        </symbol>
+        <symbol id="icon-map-pin" viewBox="0 0 24 24">
+            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+            <circle cx="12" cy="10" r="2.5"></circle>
+        </symbol>
+        <symbol id="icon-mail" viewBox="0 0 24 24">
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <path d="m3 7 9 6 9-6"></path>
+        </symbol>
+        <symbol id="icon-phone" viewBox="0 0 24 24">
+            <rect x="6" y="2" width="12" height="20" rx="2.5"></rect>
+            <path d="M10 18h4"></path>
+        </symbol>
+    </svg>
+
+    <div class="aura-background" aria-hidden="true">
+        <div class="aura-layer aura-layer-one"></div>
+        <div class="aura-layer aura-layer-two"></div>
+        <div class="cursor-spotlight"></div>
+    </div>
+
+    <div class="page">
+        <main class="glass-card">
+            <header class="header">
+                <a class="logo" href="#home" aria-label="Portfolio home">Portfolio<span>.</span></a>
+
+                <nav class="desktop-nav" aria-label="Primary navigation">
+                    <a class="nav-link active" href="#home">Home</a>
+                    <a class="nav-link" href="#about">About</a>
+                    <a class="nav-link" href="#learning">Learning</a>
+                    <a class="nav-link" href="#hobbies">My Hobbies</a>
+                    <a class="nav-link" href="#contact">My Contact</a>
+                </nav>
+
+                <div class="header-controls">
+                    <label class="theme-switch" for="theme-toggle" title="Switch between day and night color themes">
+                        <span class="theme-track" aria-hidden="true">
+                            <span class="theme-thumb"></span>
+                            <svg class="theme-icon theme-sun" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
+                            </svg>
+                            <svg class="theme-icon theme-moon" viewBox="0 0 24 24">
+                                <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"></path>
+                            </svg>
+                        </span>
+                    </label>
+
+                    <label class="layout-switch" for="portrait-toggle" title="Toggle portrait layout">
+                        <span class="switch-copy">
+                            <span class="switch-eyebrow">Layout</span>
+                            <span class="switch-name">Portrait</span>
+                        </span>
+                        <span class="switch-track" aria-hidden="true">
+                            <span class="switch-thumb">
+                                <svg><use href="#icon-phone"></use></svg>
+                            </span>
+                        </span>
+                    </label>
+                </div>
+            </header>
+
+            <span class="section-marker marker-home" aria-hidden="true"></span>
+            <section class="hero" id="home" aria-labelledby="hero-name">
+                <div class="hero-content">
+                    <h1 id="hero-name">Jude Adrian C. Cosido</h1>
+                    <h2>Student &amp; Lifelong Learner</h2>
+                    <p class="hero-description">
+                        “The reason people find it so hard to be happy is that they always see the past better than it was,
+                        the present worse than it is, and the future less resolved than it will be.”
+                    </p>
+                </div>
+
+                <div class="profile-wrap" aria-label="Portrait of Jude Adrian C. Cosido">
+                    <div class="profile-image">
+                        <img src="assets/home.png" alt="Portrait of Jude Adrian C. Cosido" width="957" height="960">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Shared sections: desktop target panels and continuous portrait scrolling. -->
+            <span class="section-marker marker-about" aria-hidden="true"></span>
+            <section class="detail-panel" id="about" aria-labelledby="about-title">
+                <div class="panel-heading">
+                    <p class="panel-kicker">A little introduction</p>
+                    <h2 id="about-title">About <span>Me.</span></h2>
+                </div>
+                <div class="about-grid">
+                    <div>
+                        <p class="panel-copy">
+                            I’m a Bachelor of Science in Information Technology (BSIT) student at the
+                            University of Cebu (UC), Main Campus. As a student and lifelong learner,
+                            I’m curious about how things work and enjoy exploring new ideas, building
+                            my skills step by step, and turning what I learn into small creative projects.
+                        </p>
+                        <p class="panel-copy">
+                            Right now, I’m learning Python and databases through hands-on practice.
+                            I’m also interested in game development and hope to explore it as I continue
+                            strengthening my programming, problem-solving, and creative skills.
+                        </p>
+                        <p class="panel-copy">
+                            Every project gives me a new opportunity to grow, experiment, and gain confidence.
+                            As I continue my studies, I want to keep challenging myself, learning from each
+                            experience, and building a strong foundation for my future in technology.
+                        </p>
+                    </div>
+                    <div class="about-facts">
+                        <div><span>Name</span><strong>Jude Adrian C. Cosido</strong></div>
+                        <div><span>Status</span><strong>Student &amp; Lifelong Learner</strong></div>
+                        <div><span>Currently Learning</span><strong>Python &amp; Database</strong></div>
+                        <div><span>Approach</span><strong>Learning by doing</strong></div>
+                    </div>
+                </div>
+            </section>
+
+            <span class="section-marker marker-learning" aria-hidden="true"></span>
+            <section class="detail-panel" id="learning" aria-labelledby="learning-title">
+                <div class="panel-heading">
+                    <p class="panel-kicker">Still in progress</p>
+                    <h2 id="learning-title">Learning<span>.</span></h2>
+                </div>
+                <div class="project-grid">
+                    <article class="project-card">
+                        <div class="project-art project-art-one"><span>01</span></div>
+                        <div class="project-info">
+                            <p>CURRENTLY LEARNING</p>
+                            <h3>Python</h3>
+                            <span>Learning in progress</span>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <div class="project-art project-art-two"><span>02</span></div>
+                        <div class="project-info">
+                            <p>CURRENTLY LEARNING</p>
+                            <h3>Database</h3>
+                            <span>Learning in progress</span>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <div class="project-art project-art-three"><span>03</span></div>
+                        <div class="project-info">
+                            <p>POSSIBLE NEXT STEP</p>
+                            <h3>Game Development</h3>
+                            <span>Probably next</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <span class="section-marker marker-service" aria-hidden="true"></span>
+            <section class="detail-panel" id="hobbies" aria-labelledby="hobbies-title">
+                <div class="panel-heading">
+                    <p class="panel-kicker">What I enjoy</p>
+                    <h2 id="hobbies-title">My <span>Hobbies.</span></h2>
+                </div>
+                <div class="hobbies-grid">
+                    <article class="hobby-card">
+                        <div class="hobby-icon" aria-hidden="true">
+                            <svg><use href="#icon-gamepad"></use></svg>
+                        </div>
+                        <div class="hobby-copy">
+                            <span>IN MY FREE TIME</span>
+                            <h3>Playing Video Games</h3>
+                            <p>I enjoy playing video games to relax, have fun, and explore new challenges.</p>
+                        </div>
+                    </article>
+                    <article class="hobby-card">
+                        <div class="hobby-icon" aria-hidden="true">
+                            <svg><use href="#icon-film"></use></svg>
+                        </div>
+                        <div class="hobby-copy">
+                            <span>MOVIE NIGHTS</span>
+                            <h3>Watching Movies</h3>
+                            <p>I enjoy watching movies, especially horror films.</p>
+                        </div>
+                    </article>
+                    <article class="hobby-card">
+                        <div class="hobby-icon" aria-hidden="true">
+                            <svg><use href="#icon-pencil"></use></svg>
+                        </div>
+                        <div class="hobby-copy">
+                            <span>CREATIVE INTERESTS</span>
+                            <h3>Drawing &amp; Art</h3>
+                            <p>I like to draw and admire other people’s masterpieces on the internet.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <span class="section-marker marker-contact" aria-hidden="true"></span>
+            <section class="detail-panel" id="contact" aria-labelledby="contact-title">
+                <div class="panel-heading">
+                    <p class="panel-kicker">How to reach me</p>
+                    <h2 id="contact-title">My <span>Contact.</span></h2>
+                </div>
+                <div class="contact-layout">
+                    <address class="contact-details">
+                        <a class="contact-item" href="mailto:hello@example.com">
+                            <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-mail"></use></svg></span>
+                            <span class="contact-item-copy">
+                                <span>Email</span>
+                                <strong>judeadrian@example.com</strong>
+                            </span>
+                        </a>
+                        <a class="contact-item" href="tel:+639000000000">
+                            <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-phone"></use></svg></span>
+                            <span class="contact-item-copy">
+                                <span>Phone Number</span>
+                                <strong>+63 900 000 0000</strong>
+                            </span>
+                        </a>
+                        <div class="contact-item">
+                            <span class="contact-icon" aria-hidden="true"><svg><use href="#icon-map-pin"></use></svg></span>
+                            <span class="contact-item-copy">
+                                <span>Address</span>
+                                <strong>Cebu City, Philippines</strong>
+                            </span>
+                        </div>
+                    </address>
+                    <div class="contact-social-panel">
+                        <p class="contact-social-kicker">Find me online</p>
+                        <h3>Let’s connect.</h3>
+                        <p>Follow or message me through my social links.</p>
+                        <div class="social-links" aria-label="Social media links">
+                            <a class="social-link" href="https://github.com/Judias1" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                                    <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                                </svg>
+                            </a>
+                            <a class="social-link social-facebook" href="https://www.facebook.com/judeadrian.cosido.7" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v6h4v-6h3l1-4h-4V9c0-.6.4-1 1-1Z"></path>
+                                </svg>
+                            </a>
+                            <a class="social-link" href="https://www.youtube.com/@BandannaKitty" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M22 12s0-3.4-.4-5a2.8 2.8 0 0 0-2-2C17.9 4.5 12 4.5 12 4.5s-5.9 0-7.6.5a2.8 2.8 0 0 0-2 2C2 8.6 2 12 2 12s0 3.4.4 5a2.8 2.8 0 0 0 2 2c1.7.5 7.6.5 7.6.5s5.9 0 7.6-.5a2.8 2.8 0 0 0 2-2c.4-1.6.4-5 .4-5Z"></path>
+                                    <path class="icon-fill" d="m10 15.5 5-3.5-5-3.5v7Z"></path>
+                                </svg>
+                            </a>
+                            <a class="social-link social-roblox" href="https://www.roblox.com/users/337826556/profile" target="_blank" rel="noopener noreferrer" aria-label="Roblox" title="Roblox">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="m6.1 2.8 15.1 4.1L17.1 22 2 17.9 6.1 2.8Zm4.2 6.1-1.4 5 5 1.4 1.4-5-5-1.4Z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Fixed outside the scroll container so it follows portrait scrolling. -->
+            <nav class="bottom-nav" aria-label="Portrait navigation">
+                <a class="bottom-link active" href="#home" aria-label="Home" data-tooltip="Home">
+                    <svg><use href="#icon-home"></use></svg>
+                </a>
+                <a class="bottom-link" href="#about" aria-label="About" data-tooltip="About">
+                    <svg><use href="#icon-user"></use></svg>
+                </a>
+                <a class="bottom-link" href="#learning" aria-label="Learning" data-tooltip="Learning">
+                    <svg><use href="#icon-book"></use></svg>
+                </a>
+                <a class="bottom-link" href="#hobbies" aria-label="My Hobbies" data-tooltip="My Hobbies">
+                    <svg><use href="#icon-gamepad"></use></svg>
+                </a>
+                <a class="bottom-link" href="#contact" aria-label="My Contact" data-tooltip="My Contact">
+                    <svg><use href="#icon-mail"></use></svg>
+                </a>
+            </nav>
+    </div>
+</body>
+</html>
